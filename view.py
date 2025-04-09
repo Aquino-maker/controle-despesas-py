@@ -8,4 +8,14 @@ def inserir_categoria(i):
         query = "INSERT INTO Categoria (nome) VALUES (?)"
         cur.execute(query, (i,))
 
-inserir_categoria("Alimentação")
+def inserir_receita(i):
+    with con:
+        cur = con.cursor()
+        query = "INSERT INTO Receitas (categoria, adicionado_em, valor) VALUES (?, ?, ?)"
+        cur.execute(query, (i,))
+
+def inserir_gastos(i):
+    with con:
+        cur = con.cursor()
+        query = "INSERT INTO Gastos(categoria, retirado_em, valor) VALUES (?, ?, ?)"
+        cur.execute(query, (i,))

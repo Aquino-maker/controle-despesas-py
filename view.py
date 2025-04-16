@@ -5,31 +5,80 @@ import sqlite3 as lite
 con = lite.connect('dados.db')
 
 # Função para inserir uma nova categoria na tabela Categoria
-def inserir_categoria(i):
+def insert_category(item):
     with con:  # Garante que a conexão será usada de forma segura
         cur = con.cursor()  # Cria um cursor para executar comandos SQL
         query = "INSERT INTO Categoria (nome) VALUES (?)"  # Comando SQL com placeholder
-        cur.execute(query, (i,))  # Executa a inserção com a tupla (i,)
+        cur.execute(query, (item,))  # Executa a inserção com a tupla (item,)
 
 # Função para inserir uma nova receita na tabela Receitas
 # Espera receber uma tupla com (categoria, data, valor)
-def inserir_receita(i):
+def insert_income(data):
     with con:
         cur = con.cursor()
         query = "INSERT INTO Receitas (categoria, adicionado_em, valor) VALUES (?, ?, ?)"
-        cur.execute(query, (i,))  # Executa a inserção com a tupla i
+        cur.execute(query, (data,))  # Executa a inserção com a tupla data
 
 # Função para inserir um novo gasto na tabela Gastos
 # Espera receber uma tupla com (categoria, data, valor)
-def inserir_gastos(i):
+def insert_expense(data):
     with con:
         cur = con.cursor()
         query = "INSERT INTO Gastos(categoria, retirado_em, valor) VALUES (?, ?, ?)"
-        cur.execute(query, (i,))  # Executa a inserção com a tupla i
+        cur.execute(query, (data,))  # Executa a inserção com a tupla data
 
 # Função para deletar uma receita da tabela Receitas pelo ID
-def deletar_receitas(i):
+def delete_income(entry_id):
     with con:
         cur = con.cursor()
         query = "DELETE FROM Receitas WHERE id=?"  # Deleta o registro com o ID correspondente
-        cur.execute(query, (i,))  # Executa o comando com a tupla (i,)
+        cur.execute(query, (entry_id,))  # Executa o comando com a tupla (entry_id,)
+
+# Função para deletar um gasto da tabela Gastos pelo ID
+def delete_expense(entry_id):
+    with con:
+        cur = con.cursor()
+        query = "DELETE FROM Gastos WHERE id=?"
+        cur.execute(query, (entry_id,))
+
+# Funções para ver os dados
+
+# Mostrar Categoria
+def show_categories():
+    item_list = []
+
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM Categoria")
+        rows = cur.fetchall()
+        for row in rows:
+            item_list.append(row)
+
+    return item_list
+
+# Mostrar Receitas
+def show_recipe():
+    item_list = []
+
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM Receitas")
+        rows = cur.fetchall()
+        for row in rows:
+            item_list.append(row)
+
+    return item_list
+
+# Mostrar Gastos
+def show_expense():
+    item_list = []
+
+    with con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM Gastos")
+        rows = cur.fetchall()
+        for row in rows:
+            item_list.append(row)
+
+    return item_list
+

@@ -81,4 +81,3 @@ def show_expense():
             item_list.append(row)
 
     return item_list
-

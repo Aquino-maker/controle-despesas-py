@@ -31,5 +31,8 @@ top_frame.grid(row=0, column=0)
 middle_frame = Frame(window, width=1043, height=361, background=color2, pady=20, relief="raised")
 middle_frame.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
+middle_baixo = Frame(window, width=1043, height=300, background=color2, relief="flat")
+middle_baixo.grid(row=2, column=0, pady=0, padx=10, sticky=NSEW)
+
 # Inicia o loop principal da aplicação
 window.mainloop()

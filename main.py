@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import Tk, ttk
+from PIL import Image, ImageTk
 
 # Definição de cores usadas na interface
 color1 = "#000000"  # Preto
@@ -31,8 +32,16 @@ top_frame.grid(row=0, column=0)
 middle_frame = Frame(window, width=1043, height=361, background=color2, pady=20, relief="raised")
 middle_frame.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
-middle_baixo = Frame(window, width=1043, height=300, background=color2, relief="flat")
-middle_baixo.grid(row=2, column=0, pady=0, padx=10, sticky=NSEW)
+bottom_frame = Frame(window, width=1043, height=300, background=color2, relief="flat")
+bottom_frame.grid(row=2, column=0, pady=0, padx=10, sticky=NSEW)
+
+app_img = Image.open('resource/grafico-de-negocios.png')
+app_img = app_img.resize((45, 45))
+app_img = ImageTk.PhotoImage(app_img)
+
+app_logo = Label(top_frame, image=app_img, text=" Aquino Economic", width=900, compound=LEFT, padx=5, relief=RAISED,
+                 anchor=NW, font=('Verdana 20 bold'), bg=color2, fg=color5)
+app_logo.place(x=0, y=0)
 
 # Inicia o loop principal da aplicação
 window.mainloop()

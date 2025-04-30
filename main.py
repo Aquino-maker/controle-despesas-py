@@ -59,7 +59,7 @@ app_logo.place(x=0, y=0)  # Define a posição do logo no frame superior
 # Função para exibir uma barra de progresso
 def percentage():
     # Cria um rótulo acima da barra de progresso
-    l_name = Label(middle_frame, text="Porcertagem em Gastos", height=1, anchor=NW,
+    l_name = Label(middle_frame, text="Porcentagem dos Gastos", height=1, anchor=NW,
                    font=('Verdana 12'), bg=color2, fg=color5)
     l_name.place(x=7, y=5)
 
@@ -74,8 +74,39 @@ def percentage():
     bar.place(x=10, y=35)
     bar['value'] = 10  # Define o valor inicial da barra (10%)
 
+    value = 50
+
+    # Exibe a porcentagem ao lado da barra
+    l_percentage = Label(middle_frame, text=f"{value:,.2f}%", anchor=NW, font=('Verdana 12'), bg=color2, fg=color5)
+    l_percentage.place(x=200, y=32)
+
+# Função para exibir gráfico de barras
+def grafic_bar():
+    category_list = ['Renda', 'Despesas', 'Saldo']  # Categorias do gráfico
+    value_list = [3000, 2000, 6236]  # Valores correspondentes
+
+    # Cria a figura e os eixos para o gráfico
+    figure = plt.Figure(figsize=(4, 3.45), dpi=60)
+    ax = figure.add_subplot(1111)
+
+    # Cria o gráfico de barras
+    ax.bar(category_list, value_list, color=color5, width=0.9)
+
+    # Adiciona rótulos nos valores das barras
+    c = 0
+    for i in ax.patches:
+        ax.text(i.get_x(), i.get_height() * 0.5,
+                f"{value_list[c]:,.0f}", fontsize=10, fontstyle='italic', verticalalignment='bottom')
+        c += 1
+
+    # Exibe o gráfico na interface
+    canvas = FigureCanvasTkAgg(figure, bottom_frame)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
+
 # Chama a função para criar a barra de progresso
 percentage()
+
 
 # Inicia o loop principal da aplicação Tkinter
 window.mainloop()
